@@ -1,2 +1,2 @@
 # aframePlayground
-playground for aFrame tests
+my personal playground for aFrame tests

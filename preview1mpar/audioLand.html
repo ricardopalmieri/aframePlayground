@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>a-frame test</title>
+    <meta name="description" content="A-Matta" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" crossorigin="anonymous" href="./assets/default-favicon.png">
+
+
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v5.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@3.2.5/dist/aframe-animation-component.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script type="text/javascript" src="./js/components/GroundSceneReflector.js"></script>
+    <script type="text/javascript" src="./js/components/aframe-mirror.js"></script>
+    <script type="text/javascript" src="./js/components/joystick.min.js"></script>
+
+
+
+</head>
+
+
+<body>
+
+    <a-scene joystick renderer="antialias: true;
+        colorManagement: true;
+        sortObjects: true;
+        physicallyCorrectLights: true;" vr-mode-ui="enabled: false">
+
+        <a-assets>
+            <img crossorigin id="link1" src="./assets/default-favicon.png">
+            <img crossorigin id="indexText" src="./assets/indexText.png">
+
+            <audio id="s01" src="./wav/01.wav"></audio>
+            <audio id="s02" src="./wav/02.mp3"></audio>
+            <audio id="s03" src="./wav/03.wav"></audio>
+
+        </a-assets>
+
+        <a-entity id="camera" camera wasd-controls look-controls restrict-position position="0 1.6 0">
+            <a-cursor color="red" fuse="true" />
+        </a-entity>
+
+        <a-entity position="0 -1 0 " shadow="receive: true" environment="
+        preset: goldmine; 
+        fog: 0.8; 
+        groundTexture:none;  
+        groundYScale: 10; 
+        groudColor:#000000 ; 
+        skyType:atmosphere;
+        dressing:none;
+        ">
+        </a-entity>
+
+        <a-plane id="bt1" width="4" height="2" position="-10 1 -13" rotation="0 45 0"
+            material="src: #indexText; roughness: 0; side:double;">
+            <a-animation begin="btOn" attribute="scale" from="1 1 1" to="2 2 1" dur="200" easing="linear"></a-animation>
+            <a-animation begin="btOff" attribute="scale" from="2 2 1" to="1 1 1" dur="200" easing="linear">
+            </a-animation>
+        </a-plane>
+
+
+
+
+        <a-box id="box1" color="purple" width="2" height="2" depth="2" position="20 3 20" rotation="0 0 0"
+            shadow="receive: true" animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true"
+            sound="src: #s01;
+                    volume: 1;
+                    refDistance:1;
+                    rollofFactor:4;
+                    autoplay:true;
+                    loop:true;">
+            <a-animation begin="boxOn1" attribute="scale" from="1 1 1" to="1 10 1" dur="200" easing="linear">
+            </a-animation>
+            <a-animation begin="boxOff1" attribute="scale" from="1 10 1" to="1 1 1" dur="200" easing="linear">
+            </a-animation>
+
+        </a-box>
+        <a-box id="box2" color="blue" width="2" height="2" depth="2" position="20 3 -20" rotation="0 0 0"
+            shadow="receive: true" animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true"
+            sound="src: #s02;
+            volume: 1;
+            refDistance:1;
+            rollofFactor:4;
+            autoplay:true;
+            loop:true;">
+            <a-animation begin="boxOn2" attribute="scale" from="1 1 1" to="1 10 1" dur="200" easing="linear">
+            </a-animation>
+            <a-animation begin="boxOff2" attribute="scale" from="1 10 1" to="1 1 1" dur="200" easing="linear">
+            </a-animation>
+
+        </a-box>
+        <a-box id="box3" color="red" width="2" height="2" depth="2" position="-20 3 20" rotation="0 0 0"
+            shadow="receive: true" animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true"
+            sound="src: #s03;
+            volume: 1;
+            refDistance:1;
+            rollofFactor:4;
+            autoplay:true;
+            loop:true;">
+            <a-animation begin="boxOn3" attribute="scale" from="1 1 1" to="1 10 1" dur="200" easing="linear">
+            </a-animation>
+            <a-animation begin="boxOff3" attribute="scale" from="1 10 1" to="1 1 1" dur="200" easing="linear">
+            </a-animation>
+
+        </a-box>
+
+
+
+
+
+
+        <a-light light="type:point; castShadow:true;" color="white" intensity="1" position="0 10 0"></a-light>
+
+
+    </a-scene>
+
+    <script>
+
+        box1.addEventListener("mouseenter", function () {
+            box1.emit('boxOn1');
+        });
+        box1.addEventListener("mouseleave", function () {
+            box1.emit('boxOff1');
+        });
+        box2.addEventListener("mouseenter", function () {
+            box2.emit('boxOn2');
+        });
+        box2.addEventListener("mouseleave", function () {
+            box2.emit('boxOff2');
+        });
+        box3.addEventListener("mouseenter", function () {
+            box3.emit('boxOn3');
+        });
+        box3.addEventListener("mouseleave", function () {
+            box3.emit('boxOff3');
+        });
+
+
+        bt1.addEventListener("mousedown", function () {
+            location.href = "index.html";
+
+        });
+        bt1.addEventListener("mouseenter", function () {
+            bt1.emit('btOn');
+
+        });
+        bt1.addEventListener("mouseleave", function () {
+            bt1.emit('btOff');
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

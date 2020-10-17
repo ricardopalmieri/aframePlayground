@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <link rel="shortcut icon" crossorigin="anonymous" href="../tests/assets/default-favicon.png" />
+  <link rel="shortcut icon" crossorigin="anonymous" href="./assets/default-favicon.png" />
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -25,16 +25,98 @@
     h3 {
       font-family: 'Roboto', sans-serif;
     }
+
+ 
+
+#fader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+	pointer-events: none;
+	background: black;
+    animation-duration: 1000ms;
+    animation-timing-function: ease-in-out;
+}
+@keyframes fade-out {
+    from { opacity: 1 }
+      to { opacity: 0 }
+}
+
+@keyframes fade-in {
+    from { opacity: 0 }
+      to { opacity: 1 }
+}
+
+#fader.fade-out {
+    opacity: 0;
+    animation-name: fade-out;
+}
+
+#fader.fade-in {
+    opacity: 1;
+    animation-name: fade-in;
+}
+
+
   </style>
 
 </head>
 
 <body>
+
+  <svg id="fader"></svg>
+	<script>
+
+function fadeInPage() {
+	if (!window.AnimationEvent) { return; }
+	var fader = document.getElementById('fader');
+    fader.classList.add('fade-out');
+}
+
+    fadeInPage();
+    
+    document.addEventListener('DOMContentLoaded', function () {
+			if (!window.AnimationEvent) { return; }
+			var anchors = document.getElementsByTagName('a');
+
+			for (var idx = 0; idx < anchors.length; idx += 1) {
+				if (anchors[idx].hostname !== window.location.hostname ||
+					anchors[idx].pathname === window.location.pathname) {
+					continue;
+				}
+				anchors[idx].addEventListener('click', function (event) {
+					var fader = document.getElementById('fader'),
+						anchor = event.currentTarget;
+
+					var listener = function () {
+						window.location = anchor.href;
+						fader.removeEventListener('animationend', listener);
+					};
+					fader.addEventListener('animationend', listener);
+
+					event.preventDefault();
+					fader.classList.add('fade-in');
+				});
+			}
+		});
+		window.addEventListener('pageshow', function (event) {
+			if (!event.persisted) {
+				return;
+			}
+			var fader = document.getElementById('fader');
+			fader.classList.remove('fade-in');
+		});
+	</script>
   <h1>AFrame Sandbox</h1>
   <br>
+  <h3><a href="indexMols.html">moleculas index</a></h3>
   <h3><a href="CenaBase.html">cena mmdia</a></h3>
   <h3><a href="360.html">360 AFrame</a></h3>
   <h3><a href="audioLand.html">audio Land</a></h3>
+
 </body>
 
 </html>

@@ -133,12 +133,10 @@
                 <img crossorigin id="ceu" src="pic01.jpg">
                 
 
-                <a-asset-item id="nav" src="./assets/testepiso.gltf"></a-asset-item>
-
             </a-assets>
 
 
-            <a-entity id="rig" movement-controls="constrainToNavMesh: true" position="0 0 0">
+            <a-entity id="rig" movement-controls="constrainToNavMesh: true" position="7 0 0">
                 <a-entity camera id="camera" position="0 2 0" look-controls="pointerLockEnabled: false">
                     <a-cursor color="red" fuse="true"></a-cursor>
                     <!-- NPC -->
@@ -155,7 +153,7 @@
             <a-plane id="piso" opacity="1" rotation="-90 0 0" position="0 0 0" width="50" height="50"
                 aframe-mirror="color:#000000;intensity:0.1;textureWidth:1024;textureHeight:1024;"></a-plane>
             <!-- Nav Mesh -->
-            <a-entity gltf-model="./assets/testepiso.glb" id="mesh" scale=".5 1 .5" nav-mesh visible="false">
+            <a-entity gltf-model="./assets/pisoHole20x20.glb" id="mesh" scale="1 1 1" nav-mesh visible="true">
             </a-entity>
 
             

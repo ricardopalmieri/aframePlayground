@@ -15,10 +15,8 @@
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v5.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@3.2.5/dist/aframe-animation-component.js"></script>
-    <script
-        src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
-    <script type="text/javascript" src="./js/components/GroundSceneReflector.js"></script>
-    <script type="text/javascript" src="./js/components/aframe-mirror.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+
     <script type="text/javascript" src="./js/components/joystick.min.js"></script>
     
     <style>
@@ -133,18 +131,19 @@
 
         </a-assets>
 
-        <a-entity id="camera" camera wasd-controls look-controls restrict-position position="0 1.6 0">
+        <a-entity id="rig" rotation="-5.156620156177409 34.73671224539642 0" camera wasd-controls look-controls restrict-position position="8.29334 1.6 10.8627">
             <a-cursor color="red" fuse="true" />
         </a-entity>
 
-        <a-entity id="cenario" environment="dressing: none" position="0 -1 0 " shadow="receive: true" environment="
-        preset: goldmine; 
+        <a-entity id="cenario" scale="100 1 100" position="0 -1 0 " shadow="receive: true" environment="
+        preset: goldmine;
+        dressing:none; 
         fog: 0.8; 
         groundTexture:none;  
-        groundYScale: 10; 
+        groundYScale: 1;
         groudColor:#000000 ; 
         skyType:atmosphere;
-        dressing:none;
+        playArea:10;
         ">
         </a-entity>
 

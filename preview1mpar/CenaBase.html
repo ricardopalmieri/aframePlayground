@@ -13,55 +13,60 @@
 
 
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"> </script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v5.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.0.3/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@3.2.5/dist/aframe-animation-component.js"></script>
     <script type="text/javascript" src="./js/components/GroundSceneReflector.js"></script>
     <script type="text/javascript" src="./js/components/aframe-mirror.js"></script>
+    <!--
     <script type="text/javascript" src="./js/components/joystick.min.js"></script>
-<style>
-    #fader {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: 999999;
-			pointer-events: none;
-			background: black;
-			animation-duration: 1000ms;
-			animation-timing-function: ease-in-out;
-		}
 
-		@keyframes fade-out {
-			from {
-				opacity: 1
-			}
+-->
 
-			to {
-				opacity: 0
-			}
-		}
 
-		@keyframes fade-in {
-			from {
-				opacity: 0
-			}
+    <style>
+        #fader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999999;
+            pointer-events: none;
+            background: black;
+            animation-duration: 1000ms;
+            animation-timing-function: ease-in-out;
+        }
 
-			to {
-				opacity: 1
-			}
-		}
+        @keyframes fade-out {
+            from {
+                opacity: 1
+            }
 
-		#fader.fade-out {
-			opacity: 0;
-			animation-name: fade-out;
-		}
+            to {
+                opacity: 0
+            }
+        }
 
-		#fader.fade-in {
-			opacity: 1;
-			animation-name: fade-in;
-		}
-</style>
+        @keyframes fade-in {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        #fader.fade-out {
+            opacity: 0;
+            animation-name: fade-out;
+        }
+
+        #fader.fade-in {
+            opacity: 1;
+            animation-name: fade-in;
+        }
+    </style>
 
 </head>
 
@@ -69,73 +74,99 @@
 <body>
 
     <svg id="fader"></svg>
-	<script>
+    <script>
 
-		function fadeInPage() {
-			if (!window.AnimationEvent) { return; }
-			var fader = document.getElementById('fader');
-			fader.classList.add('fade-out');
-		}
+        function fadeInPage() {
+            if (!window.AnimationEvent) { return; }
+            var fader = document.getElementById('fader');
+            fader.classList.add('fade-out');
+        }
 
-		fadeInPage();
-
-
-		document.addEventListener('DOMContentLoaded', function () {
-			if (!window.AnimationEvent) { return; }
-			var anchors = document.getElementsByTagName('a');
-
-			for (var idx = 0; idx < anchors.length; idx += 1) {
-				if (anchors[idx].hostname !== window.location.hostname ||
-					anchors[idx].pathname === window.location.pathname) {
-					continue;
-				}
-				anchors[idx].addEventListener('click', function (event) {
-					var fader = document.getElementById('fader'),
-						anchor = event.currentTarget;
-
-					var listener = function () {
-						window.location = anchor.href;
-						fader.removeEventListener('animationend', listener);
-					};
-					fader.addEventListener('animationend', listener);
-
-					event.preventDefault();
-					fader.classList.add('fade-in');
-				});
-			}
-		});
-		window.addEventListener('pageshow', function (event) {
-			if (!event.persisted) {
-				return;
-			}
-			var fader = document.getElementById('fader');
-			fader.classList.remove('fade-in');
-		});
-
-	</script>
+        fadeInPage();
 
 
-    <a-scene joystick renderer="antialias: true;
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!window.AnimationEvent) { return; }
+            var anchors = document.getElementsByTagName('a');
+
+            for (var idx = 0; idx < anchors.length; idx += 1) {
+                if (anchors[idx].hostname !== window.location.hostname ||
+                    anchors[idx].pathname === window.location.pathname) {
+                    continue;
+                }
+                anchors[idx].addEventListener('click', function (event) {
+                    var fader = document.getElementById('fader'),
+                        anchor = event.currentTarget;
+
+                    var listener = function () {
+                        window.location = anchor.href;
+                        fader.removeEventListener('animationend', listener);
+                    };
+                    fader.addEventListener('animationend', listener);
+
+                    event.preventDefault();
+                    fader.classList.add('fade-in');
+                });
+            }
+        });
+        window.addEventListener('pageshow', function (event) {
+            if (!event.persisted) {
+                return;
+            }
+            var fader = document.getElementById('fader');
+            fader.classList.remove('fade-in');
+        });
+
+    </script>
+
+
+    <a-scene renderer="antialias: true;
         colorManagement: true;
         sortObjects: true;
-        physicallyCorrectLights: true;" vr-mode-ui="enabled: false">
+        physicallyCorrectLights: true;" joystick vr-mode-ui="enabled: false">
+
 
         <a-assets>
             <img crossorigin id="link1" src="./assets/default-favicon.png">
             <img crossorigin id="indexText" src="./assets/indexText.png">
             <img crossorigin id="ceu" src="pic01.jpg">
-            <a-asset-item
-            id="wolf"
-            src="https://raw.githubusercontent.com/jorgecardoso/aframe-usj-models/master/wolf_with_animations/scene.gltf"
-          >
-          </a-asset-item>
+            <a-asset-item id="wolf"
+                src="https://raw.githubusercontent.com/jorgecardoso/aframe-usj-models/master/wolf_with_animations/scene.gltf">
+            </a-asset-item>
+
+            <a-asset-item id="drone" src="./assets/drone/drone01.glb"> </a-asset-item>
+            <a-asset-item id="nav" src="./assets/testepiso.glb"></a-asset-item>
 
         </a-assets>
 
-        <a-entity id="camera" camera wasd-controls look-controls restrict-position position="0 1.6 0">
-            <a-cursor color="red" fuse="true" />
+
+        <!--
+        <a-entity id="rig" movement-controls="speed: 0.55; constrainToNavMesh: true;">
+            <a-entity camera look-controls="pointerLockEnable: true" id="camera"
+                rotation="-5.156620156177409 34.73671224539642 0" position="8.29334 1.6 10.8627">
+                <a-cursor color="red" fuse="true"></a-cursor>
+            </a-entity>
+        </a-entity>
+        -->
+        <a-entity id="rig" movement-controls="constrainToNavMesh: true" position="0 0 0">
+            <a-entity camera id="camera" position="0 2 0" look-controls="pointerLockEnabled: false"  >
+                <a-cursor color="red" fuse="true"></a-cursor>
+                       <!-- NPC -->
+        <a-entity id="npc" geometry="primitive: box"  nav-agent="speed: 1.5"></a-entity>
+            </a-entity>
         </a-entity>
 
+
+ 
+
+        <!-- Nav Mesh -->
+        <a-entity gltf-model="./assets/testepiso.glb"  id="mesh"  nav-mesh visible="false">
+        </a-entity>
+
+        <!-- piso -->
+
+        <a-plane id="piso" opacity="1" rotation="-90 0 0" position="0 -.5 0" width="40" height="40"
+            aframe-mirror="color:#000000;intensity:0.1;textureWidth:1024;textureHeight:1024;"></a-plane>
 
 
         <a-plane id="bt1" width="4" height="2" position="-15.81106 1 -18.09463" rotation="0 45 0"
@@ -206,22 +237,47 @@
             animation="property: position; to: 10 0 0; dur: 1000; easing: linear; loop: true; dir:alternate;"></a-light>
         <a-light light="type:point; castShadow:true;" color="white" intensity="3" position="0 10 10"></a-light>
 
-        <a-plane opacity="1" rotation="-90 0 0" position="0 -.5 0" width="3000" height="3000"
-            aframe-mirror="color:#000000;intensity:0.1;textureWidth:1024;textureHeight:1024;"></a-plane>
+
+
+
         <a-sky src="#ceu" animation="property: rotation; to: 0 360 0; dur: 90000; easing: linear; loop: true"></a-sky>
 
 
 
-        <a-plane material="src: ./assets/3602.mp4; volume: 0.001;" rotation="30 -45 0" position="10 4 -10"
-            scale="16 9 0"></a-plane>
+        <a-plane id="videoWall" material="src: ./assets/3602.mp4; volume: 0.001;" rotation="29.999999999999996 -45 0"
+            position="9.87614 4.10977 -9.86908" scale="16 9 0.00001"></a-plane>
 
-        <a-gltf-model
+
+
+
+
+
+        <!--
+
+        <a-gltf-model id="robot"
             src="https://cdn.aframe.io/test-models/models/glTF-2.0/brainstem/BrainStem.gltf"
             position="5 -.5 -5" scale="1.6 1.6 1.6"
             animation="property: rotation; to: 0 -360 0; dur: 8000; easing: linear; loop: true">
         </a-gltf-model>
 
-        <a-gltf-model
+        <a-gltf-model id="drone1"
+        src="./assets/drone/drone01.glb"
+        scale=".5 .5 .5"
+        animation="property: rotation; to: 0 -360 0; dur: 8000; easing: linear; loop: true"></a-gltf-model>
+        >
+
+        </a-gltf-model>
+
+        <a-gltf-model id="drone02"
+        src="./assets/drone/drone02.glb"
+        scale=".5 .5 .5"
+        position="3 3 3"
+        animation="property: rotation; to: 0 -360 0; dur: 8000; easing: linear; loop: true"></a-gltf-model>
+        >
+
+        </a-gltf-model>
+
+        <a-gltf-model id="lobo"
         position="-5 .5 -5"
         rotation="0 180 0"
         scale="3 3 3"
@@ -229,14 +285,17 @@
         animation-mixer="clip: 04_Idle"
       ></a-gltf-model>
 
-        <a-curvedimage src="./assets/3602.mp4" radius="5.7" theta-length="90" height="4" rotation="0 270 0"
-            position="0 2 0"></a-curvedimage>
+      -->
+
+        <a-curvedimage id="painelcurvo" src="./assets/3602.mp4" radius="5.7" theta-length="90" height="4"
+            rotation="0 270 0" position="0 2 0"></a-curvedimage>
 
     </a-scene>
 
     <script>
 
         box.addEventListener("mouseenter", function () {
+            //your function
             box.emit('boxOn');
 
         }
@@ -253,19 +312,19 @@
 
         bt1.addEventListener("mousedown", function () {
             addEventListener('click', function (event) {
-					var fader = document.getElementById('fader'),
-						anchor = event.currentTarget;
+                var fader = document.getElementById('fader'),
+                    anchor = event.currentTarget;
 
-					var listener = function () {
-						window.location = anchor.href;
-						fader.removeEventListener('animationend', listener);
-					};
-					fader.addEventListener('animationend', listener);
+                var listener = function () {
+                    window.location = anchor.href;
+                    fader.removeEventListener('animationend', listener);
+                };
+                fader.addEventListener('animationend', listener);
 
-					event.preventDefault();
-					fader.classList.add('fade-in');
-				});
-				setTimeout(() => {  location.href = "index.html"; }, 1000);
+                event.preventDefault();
+                fader.classList.add('fade-in');
+            });
+            setTimeout(() => { location.href = "index.html"; }, 1000);
 
         });
         bt1.addEventListener("mouseenter", function () {

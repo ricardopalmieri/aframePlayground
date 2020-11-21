@@ -131,8 +131,11 @@
                 <img crossorigin id="link1" src="./assets/default-favicon.png">
                 <img crossorigin id="cupula" src="./assets/s00b/sphere01.jpg">
                 <img crossorigin id="ceu" src="./assets/s01/pic01.jpg">
-                <a-asset-item id="base" src="https://cdn.glitch.com/d9a5c2ab-7a04-4d2f-88c6-5ba6495dc84a%2Fbase.gltf?v=1605588471530"></a-asset-item>
-                <video id="vid01" src="https://cdn.glitch.com/d9a5c2ab-7a04-4d2f-88c6-5ba6495dc84a%2FTRAILER1024.mp4?v=1605588507938" autoplay="true" loop="false">
+                <a-asset-item id="cupula" src="./assets/cupula.glb"></a-asset-item>
+                <a-asset-item id="base" src="./assets/s03/base.gltf"></a-asset-item>
+                <video id="vid01" src="./assets/s03/TRAILER1024.mp4" autoplay="true" loop="false">
+                <audio id="track"  src="./assets/s03/TRAILER1024.mp3"  autoplay="true" loop="true" ></audio> 
+
 
 
             </a-assets>
@@ -156,21 +159,13 @@
             <a-light light="type:point; castShadow:true;" color="white" intensity="3" position="10 7 -10"></a-light>
             <a-light light="type:point; castShadow:true;" color="white" intensity="3" position="-10 7 -10"></a-light>
 
-
-            <!--
-
-            <a-plane id="piso" opacity=".2" rotation="-90 0 0" position="0 0 0" width="50" height="50"
+            <a-plane id="piso" opacity="1" rotation="-90 0 0" position="0 0 0" width="50" height="50"
                 aframe-mirror="color:#000000;intensity:0.1;textureWidth:1024;textureHeight:1024;"></a-plane>
-           Nav Mesh  -->
+            <!-- Nav Mesh  -->
             <a-entity gltf-model="./assets/pisoHole20x20.glb" id="mesh" scale="1 1 1" nav-mesh visible="false">
             </a-entity>
 
-
-
-
-            <a-videosphere src="https://cdn.glitch.com/d9a5c2ab-7a04-4d2f-88c6-5ba6495dc84a%2FESTRELAS2048.mp4?v=1605588602638" rotation="0 180 0"></a-videosphere>
-
-
+            <a-entity gltf-model="./assets/cupula.glb" id="cupula" position="0 0 0" ></a-entity>
 
 
 
@@ -181,11 +176,9 @@
 
             <a-video src="#vid01" width="16" height="9" position="0 0 0" visible="false"></a-video>
             
-            <!--
-            <audio id="track" src="https://cdn.glitch.com/d9a5c2ab-7a04-4d2f-88c6-5ba6495dc84a%2FTRAILER1024.wav?v=1605588590772" autoplay="true" loop="false"></audio>
--->
 
-            <a-entity gltf-model="#base" position="0 .1 0" scale=".02 .02 .02 "></a-entity>
+
+            <a-entity id="cha" gltf-model="#base" position="0 .1 0" scale=".02 .02 .02 "></a-entity>
 
             <a-curvedimage id="painelcurvo" src="#ceu" radius="5.7" theta-length="90" height="6" rotation="0 0 0"
                 position="-7 3 7" scale="-1 1 1" material="src: #vid01; npot: false; on:false;"
@@ -213,7 +206,7 @@
 
             <map name="image-map">
                 <area target="_self" alt="previous" title="previous" href="s02.html" coords="50,57,0,111" shape="rect">
-                <area target="_self" alt="next" title="next" href="s04.html" coords="232,57,280,106" shape="rect">
+                <area target="_self" alt="next" title="next" href="s03360.html" coords="232,57,280,106" shape="rect">
                 <area target="_self" alt="index" title="index" href="indexMols.html" coords="140,80,81" shape="circle">
             </map>
 
@@ -223,52 +216,20 @@
             use o mouse e setas do teclado para explorar</h5>
     </div>
 
-    <!--
+
     <script>
 
-        box.addEventListener("mouseenter", function () {
-            box.emit('boxOn');
 
-        }
+        cha.addEventListener("click", function () {
+            location.href = "s03360.html"; 
 
-        );
-
-        box.addEventListener("mouseleave", function () {
-            box.emit('boxOff');
-
-        }
-
-        );
-
-
-        bt1.addEventListener("mousedown", function () {
-            addEventListener('click', function (event) {
-                var fader = document.getElementById('fader'),
-                    anchor = event.currentTarget;
-
-                var listener = function () {
-                    window.location = anchor.href;
-                    fader.removeEventListener('animationend', listener);
-                };
-                fader.addEventListener('animationend', listener);
-
-                event.preventDefault();
-                fader.classList.add('fade-in');
-            });
-            setTimeout(() => { location.href = "index.html"; }, 1000);
-
-        });
-        bt1.addEventListener("mouseenter", function () {
-            bt1.emit('btOn');
-
-        });
-        bt1.addEventListener("mouseleave", function () {
-            bt1.emit('btOff');
-
+            
+        
+        
         });
 
     </script>
--->
+
 
 </body>
 

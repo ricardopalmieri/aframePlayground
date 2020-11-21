@@ -132,6 +132,8 @@
                 <img crossorigin id="cupula" src="./assets/s00b/sphere01.jpg">
                 <img crossorigin id="ceu" src="./assets/s01/pic01.jpg">
                 <a-asset-item id="base" src="./assets/s01/baseCentro.gltf"></a-asset-item>
+                <a-asset-item id="cupula" src="./assets/cupula.glb"></a-asset-item>
+                
 
             </a-assets>
 
@@ -162,7 +164,7 @@
             <a-entity gltf-model="./assets/pisoHole20x20.glb" id="mesh" scale="1 1 1" nav-mesh visible="false">
             </a-entity>
 
-            <a-entity gltf-model="./assets/cupula.glb" id="cupula" position="0 0 0" ></a-entity>
+            <a-entity gltf-model="./assets/cupula.glb" id="cup" position="0 0 0" ></a-entity>
 
 
 
@@ -201,7 +203,7 @@
             <img src="./assets/menuMini.png" usemap="#image-map">
 
             <map name="image-map">
-                <area target="_self" alt="previous" title="previous" href="index.html" coords="50,57,0,111" shape="rect">
+                <area target="_self" alt="previous" title="previous" href="s09.html" coords="50,57,0,111" shape="rect">
                 <area target="_self" alt="next" title="next" href="s02.html" coords="232,57,280,106" shape="rect">
                 <area target="_self" alt="index" title="index" href="indexMols.html" coords="140,80,81" shape="circle">
             </map>

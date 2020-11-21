@@ -15,6 +15,7 @@
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@3.2.5/dist/aframe-animation-component.js"></script>
+    <script src="https://unpkg.com/aframe-multi-video-component/dist/aframe-multi-video-component.min.js"></script>
     <script type="text/javascript" src="./js/components/GroundSceneReflector.js"></script>
     <script type="text/javascript" src="./js/components/aframe-mirror.js"></script>
     <!--
@@ -131,8 +132,12 @@
                 <img crossorigin id="link1" src="./assets/default-favicon.png">
                 <img crossorigin id="cupula" src="./assets/sphere01.jpg">
                 <img crossorigin id="ceu" src="./assets/s01/pic01.jpg">
-                <video id="vid01" src="./assets/s05/reflexion.mp4"  autoplay="true" loop="true">
-                <audio id="track"  src="./assets/s02/vidEmancipa3.wav"  autoplay="true" loop="true" ></audio>    
+                <video id="vid01" loop crossorigin="anonymous" webkit-playsinline playsinline autoplay="true" loop="true">
+                    <source src="./assets/s05/reflexion.mp4"></source>
+                </video>
+
+         
+            
                 <a-asset-item id="base" src="./assets/s05/reflexion1.gltf"></a-asset-item>
 
             </a-assets>
@@ -181,21 +186,21 @@
 
 
             
-            <a-video src="./assets/s05/reflexion.mp4" width="16" height="9" position="0 0 0" visible="false"></a-video>
-            <a-video src="./assets/s05/reflexionMute.mp4" width="16" height="9" position="0 0 0" visible="false"></a-video>
+            <a-entity aframe-multi-video-component="src: #vid01; time: 200; duration: 5; volume: 0.0; autoplay:true;" scale=".0 .0 .0"></a-entity>
+            <a-video src="#vid01" width="1" height="1" position="0 0 0" visible="false"></a-video>
 
             <a-entity gltf-model="#base" position="0 0 0" scale=".01 .01 .01 " rotation="0 50 0"></a-entity>
             
 
             <a-curvedimage id="painelcurvo" radius="5.7" theta-length="90" height="6"
                 rotation="0 270 0" position="-7 3 7" geometry="radius:6.97;thetaLength:130;thetaStart:-20"
-                shadow="receive: true" material="src: ./assets/s05/reflexionMute.mp4; npot: false; on:false;">
+                shadow="receive: true" material="src: #vid01; volume: 0.0; autoplay:true; npot: false; on:false;">
                
             </a-curvedimage>
 
 
             <a-curvedimage id="painelcurvo2" src="#ceu" radius="5.7" theta-length="90" height="6"
-                rotation="0 90 0" position="7 3 -7" material="src: ./assets/s05/reflexionMute.mp4; npot: false;  on:false;" geometry="radius:6.97;thetaLength:130;thetaStart:-20"
+                rotation="0 90 0" position="7 3 -7" material="src: #vid01; volume: 0.0; autoplay:true; npot: false;  on:false;" geometry="radius:6.97;thetaLength:130;thetaStart:-20"
                 shadow="receive: true">
             </a-curvedimage>
 

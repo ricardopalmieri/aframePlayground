@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>obs_cu_ra </title>
-    <meta name="description" content="obs_cu_ra" />
+    <title>Estrelas no Deserto</title>
+    <meta name="description" content="Estrelas no Deserto" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,7 +15,6 @@
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@3.2.5/dist/aframe-animation-component.js"></script>
-    <script src="https://unpkg.com/aframe-multi-video-component/dist/aframe-multi-video-component.min.js"></script>
     <script type="text/javascript" src="./js/components/GroundSceneReflector.js"></script>
     <script type="text/javascript" src="./js/components/aframe-mirror.js"></script>
     <!--
@@ -73,7 +72,7 @@
 </head>
 
 
-<body style="background-color: black;">
+<body style="background-color: black);">
 
     <svg id="fader"></svg>
     <script>
@@ -122,91 +121,49 @@
     </script>
 
     <div>
-        <a-scene  renderer="antialias: true;
+        <a-scene renderer="antialias: true;
         colorManagement: true;
         sortObjects: true;
-        physicallyCorrectLights: true;" vr-mode-ui="enabled: false" background="blue"
-        loading-screen="dotsColor: red; backgroundColor: black">
+        physicallyCorrectLights: true;" vr-mode-ui="enabled: false" background="blue">
 
 
             <a-assets>
                 <img crossorigin id="link1" src="./assets/default-favicon.png">
-                <img crossorigin id="cupula" src="./assets/sphere01.jpg">
+                <img crossorigin id="cupula" src="./assets/s00b/sphere01.jpg">
                 <img crossorigin id="ceu" src="./assets/s01/pic01.jpg">
-                <video id="vid01" loop crossorigin="anonymous" webkit-playsinline playsinline autoplay="true" loop="true">
-                    <source src="./assets/s04/obscuraAudio.mp4"></source>
-                </video>
-                                  
-                <a-asset-item id="base" src="./assets/s04/camara_obscura.gltf"></a-asset-item>
+                <a-asset-item id="base" src="./assets/s03/base.gltf"></a-asset-item>
+                <video id="vid01" src="./assets/s03/ESTRELAS2048.mp4" autoplay="true" loop="false">
+
 
             </a-assets>
 
 
-            <a-entity id="rig" movement-controls="constrainToNavMesh: true" position="-0 0 8">
-                <a-entity camera id="camera" position="0 2 0" look-controls="pointerLockEnabled: false" >
-                    <a-cursor cursor="rayOrigin: mouse" fuse="false"></a-cursor>
-                    
-                    <!-- NPC -->
-                    <a-entity id="npc" geometry="primitive: box; width:0; height:0; depth:0;"nav-agent="speed: 1.5" ></a-entity>
+            <a-entity id="rig"  position="-0 0 8">
+                <a-entity camera id="camera" position="0 2 0" look-controls="pointerLockEnabled: false">
+        
                 </a-entity>
             </a-entity>
 
-            
+
+
+
+
+          
+
+
+
+
+            <a-videosphere src="#vid01" rotation="0 180 0"></a-videosphere>
 
 
 
 
 
-            <a-light light="type:point; castShadow:true;" color="white" intensity="3" position="10 7 10"></a-light>
-            <a-light light="type:point; castShadow:true;" color="white" intensity="3" position="-10 7 10"></a-light>
-            <a-light light="type:point; castShadow:true;" color="white" intensity="3" position="10 7 -10"></a-light>
-            <a-light light="type:point; castShadow:true;" color="white" intensity="3" position="-10 7 -10"></a-light>
 
 
 
 
-            <a-plane id="piso" opacity="1" rotation="-90 0 0" position="0 0 0" width="50" height="50"
-                aframe-mirror="color:#000000;intensity:0.1;textureWidth:1024;textureHeight:1024;"></a-plane>
-            <!-- Nav Mesh  -->
-            <a-entity gltf-model="./assets/pisoHole20x20.glb" id="mesh" scale="1 1 1" nav-mesh visible="false">
-            </a-entity>
 
-            <a-entity gltf-model="./assets/cupula.glb" id="cupula" position="0 0 0" ></a-entity>
-
-
-           
-
-
-
-
-  
-
-            
-            <a-entity gltf-model="#base" position="0 .1 0" scale=".01 .01 .01 "></a-entity>
-
-            
-        
-            
-            <a-entity aframe-multi-video-component="src: #vid01; time: 200; duration: 5; volume: 0.0; autoplay:true;" scale=".1 .1 .1"></a-entity>
-            <a-video src="#vid01" width="1" height="1" position="0 0 0" visible="false"></a-video>
-            
-
-            <a-curvedimage id="painelcurvo" radius="5.7" theta-length="90" height="6"
-                rotation="0 -45 0" position="-7 3 7" geometry="radius:6.97;thetaLength:40;thetaStart:-20"
-                shadow="receive: true" scale="-1 1 1" material="src: #vid01;  volume: 0.0; autoplay:true; npot: false; on:false;">
-               
-            </a-curvedimage>
-
-
-            <a-curvedimage id="painelcurvo2" src="#ceu" radius="5.7" theta-length="90" height="6"
-                rotation="0 -225 0" position="7 3 -7" scale="-1 1 1" material="src: #vid01;  volume: 0.0; autoplay:true; npot: false;  on:false;" geometry="radius:6.97;thetaLength:40;thetaStart:-20"
-                shadow="receive: true">
-            </a-curvedimage>
-
-            <a-curvedimage id="painelcurvo3" src="#ceu" radius="5.7" theta-length="90" height="6"
-                rotation="0 0 0" position="7 3 7" material="" geometry="radius:6.97;thetaLength:130;thetaStart:-20"
-                shadow="receive: true">
-            </a-curvedimage>
 
 
 
@@ -218,7 +175,7 @@
 
             <map name="image-map">
                 <area target="_self" alt="previous" title="previous" href="s03.html" coords="50,57,0,111" shape="rect">
-                <area target="_self" alt="next" title="next" href="s05.html" coords="232,57,280,106" shape="rect">
+                <area target="_self" alt="next" title="next" href="s04.html" coords="232,57,280,106" shape="rect">
                 <area target="_self" alt="index" title="index" href="indexMols.html" coords="140,80,81" shape="circle">
             </map>
 

@@ -133,7 +133,7 @@
                 <img crossorigin id="ceu" src="./assets/s01/pic01.jpg">
                 <a-asset-item id="cupula" src="./assets/cupula.glb"></a-asset-item>
 
-                <video id="vid01" loop crossorigin="anonymous" webkit-playsinline playsinline autoplay="true" loop="true">
+                <video id="vid01" webkit-playsinline playsinline autoplay="true" loop="true">
                     <source src="./assets/s02/vidEmancipa.mp4" ></source>
                 </video>
        
@@ -189,26 +189,18 @@
             <a-entity gltf-model="#base"  position="0 0 0" scale=".1 .1 .1"></a-entity>
 
 
-                       <a-entity aframe-multi-video-component="src: #vid01; time: 200; duration: 5; volume: 0.0; autoplay:true;" scale=".1 .1 .1"></a-entity>
+                       <a-entity aframe-multi-video-component="src: ./assets/s02/vidEmancipa.mp4; time: 200; duration: 5; volume: 0.0; autoplay:true;" scale=".1 .1 .1"></a-entity>
             <a-video src="#vid01" width="1" height="1" position="0 0 0" visible="false"></a-video>
             
 
-            <a-curvedimage id="painelcurvo" radius="5.7" theta-length="90" height="6"
-                rotation="0 270 0" position="-7 3 7" geometry="radius:6.97;thetaLength:130;thetaStart:-20"
-                shadow="receive: true" material="src: src: #vid01;  volume: 0.0; autoplay:true;; npot: false; on:false;">
-               
-            </a-curvedimage>
 
 
             <a-curvedimage id="painelcurvo2" src="#ceu" radius="5.7" theta-length="90" height="6"
-                rotation="0 90 0" position="7 3 -7" material="src: src: #vid01;  volume: 0.0; autoplay:true; npot: false;  on:false;" geometry="radius:6.97;thetaLength:130;thetaStart:-20"
+                rotation="0 90 0" position="7 3 -7" material="src: #vid01;  volume: 0.0; autoplay:true; npot: false;  on:false;" geometry="radius:6.97;thetaLength:130;thetaStart:-20"
                 shadow="receive: true">
             </a-curvedimage>
 
-            <a-curvedimage id="painelcurvo3" src="#ceu" radius="5.7" theta-length="90" height="6"
-                rotation="0 0 0" position="7 3 7" material="" geometry="radius:6.97;thetaLength:130;thetaStart:-20"
-                shadow="receive: true">
-            </a-curvedimage>
+  
 
 
 

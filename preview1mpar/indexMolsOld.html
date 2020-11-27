@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>mols index</title>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"> </script>
+	<script src="https://unpkg.com/aframe-animation-component@3.2.5/dist/aframe-animation-component.js"></script>
+	<script src="./js/components/aframe-orbit-controls.min.js"></script>
+	<style>
+		#fader {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 999999;
+			pointer-events: none;
+			background: black;
+			animation-duration: 1000ms;
+			animation-timing-function: ease-in-out;
+		}
+
+		@keyframes fade-out {
+			from {
+				opacity: 1
+			}
+
+			to {
+				opacity: 0
+			}
+		}
+
+		@keyframes fade-in {
+			from {
+				opacity: 0
+			}
+
+			to {
+				opacity: 1
+			}
+		}
+
+		#fader.fade-out {
+			opacity: 0;
+			animation-name: fade-out;
+		}
+
+		#fader.fade-in {
+			opacity: 1;
+			animation-name: fade-in;
+		}
+	</style>
+
+
+
+</head>
+
+<body style="background-color: black;">
+	<svg id="fader"></svg>
+	<script>
+
+		function fadeInPage() {
+			if (!window.AnimationEvent) { return; }
+			var fader = document.getElementById('fader');
+			fader.classList.add('fade-out');
+		}
+
+		fadeInPage();
+
+
+		document.addEventListener('DOMContentLoaded', function () {
+			if (!window.AnimationEvent) { return; }
+			var anchors = document.getElementsByTagName('a');
+
+			for (var idx = 0; idx < anchors.length; idx += 1) {
+				if (anchors[idx].hostname !== window.location.hostname ||
+					anchors[idx].pathname === window.location.pathname) {
+					continue;
+				}
+				anchors[idx].addEventListener('click', function (event) {
+					var fader = document.getElementById('fader'),
+						anchor = event.currentTarget;
+
+					var listener = function () {
+						window.location = anchor.href;
+						fader.removeEventListener('animationend', listener);
+					};
+					fader.addEventListener('animationend', listener);
+
+					event.preventDefault();
+					fader.classList.add('fade-in');
+				});
+			}
+		});
+		window.addEventListener('pageshow', function (event) {
+			if (!event.persisted) {
+				return;
+			}
+			var fader = document.getElementById('fader');
+			fader.classList.remove('fade-in');
+		});
+
+	</script>
+
+
+	<div style="position:relative;">
+
+
+		<a-scene renderer="antialias: true;	
+	sortObjects: true;
+	" vr-mode-ui="enabled: false" cursor="rayOrigin: mouse">
+
+
+			<a-assets>
+				<img crossorigin id="link1" src="./assets/default-favicon.png">
+				<img crossorigin id="ceu" src="./assets/s00b/sphere01.jpg">
+			</a-assets>
+			
+
+			<a-entity camera fov="2"
+				orbit-controls="autoRotate:true; autoRotateSpeed:.01; target: 1 1.6 -0.5; minDistance: 0.1; maxDistance: 1800; initialPosition: 15 0 15"
+				look-controls="enabled: false" touchEnabled="true">
+			</a-entity>
+
+			<a-entity light="type: point; color: white; intensity: .5;"></a-entity>
+			<a-entity light="type: ambient; color: white; intensity: .5;"></a-entity>
+
+			<a-sky src="#ceu" animation="property: rotation; to: 0 -360 0; dur: 90000; easing: linear; loop: true">
+			</a-sky>
+
+
+
+			<a-sphere id="sph00" position="0 0 0" color="#E0B531" wireframe="true">
+				<a-animation begin="sph00S" attribute="scale" from="1 1 1" to="1.5 1.5 1.5" dur="200" easing="linear">
+				</a-animation>
+				<a-animation begin="sph00E" attribute="scale" from="1.5 1.5 1.5" to="1 1 1" dur="200" easing="linear">
+				</a-animation>
+				<a-text value="INDEX" position="0
+			 1.2 0" width="10" color="white" align="center" side="double"></a-text>
+			</a-sphere>
+			<a-sphere id="sph01" position="10 0 0" color="#6691F2" wireframe="true">
+				<a-animation begin="sph00S" attribute="scale" from="1 1 1" to="1.5 1.5 1.5" dur="200" easing="linear">
+				</a-animation>
+				<a-animation begin="sph00E" attribute="scale" from="1.5 1.5 1.5" to="1 1 1" dur="200" easing="linear">
+				</a-animation>
+				<a-text value="SALA01" position="0
+			 1.2 0" width="10" color="white" align="center" side="double"></a-text>
+			</a-sphere>
+			<a-sphere id="sph02" position="10 0 10" color="green" wireframe="true">
+				<a-animation begin="sph00S" attribute="scale" from="1 1 1" to="1.5 1.5 1.5" dur="200" easing="linear">
+				</a-animation>
+				<a-animation begin="sph00E" attribute="scale" from="1.5 1.5 1.5" to="1 1 1" dur="200" easing="linear">
+				</a-animation>
+				<a-text value="SALA02" position="0
+		 1.2 0" width="10" color="white" align="center" side="double"></a-text>
+			</a-sphere>
+			<a-sphere id="sph03" position="0 0 10" color="cyan" wireframe="true">
+				<a-animation begin="sph00S" attribute="scale" from="1 1 1" to="1.5 1.5 1.5" dur="200" easing="linear">
+				</a-animation>
+				<a-animation begin="sph00E" attribute="scale" from="1.5 1.5 1.5" to="1 1 1" dur="200" easing="linear">
+				</a-animation>
+				<a-text value="SALA03" position="0
+		 1.2 0" width="10" color="white" align="center" side="double"></a-text>
+			</a-sphere>
+			<a-sphere id="sph04" position="0 5 0" color="cyan" wireframe="true">
+				<a-animation begin="sph00S" attribute="scale" from="1 1 1" to="1.5 1.5 1.5" dur="200" easing="linear">
+				</a-animation>
+				<a-animation begin="sph00E" attribute="scale" from="1.5 1.5 1.5" to="1 1 1" dur="200" easing="linear">
+				</a-animation>
+				<a-text value="SALA04" position="0
+		 1.2 0" width="10" color="white" align="center" side="double"></a-text>
+			</a-sphere>
+			<a-sphere id="sph05" position="-10 0 0" color="green" wireframe="true">
+				<a-animation begin="sph00S" attribute="scale" from="1 1 1" to="1.5 1.5 1.5" dur="200" easing="linear">
+				</a-animation>
+				<a-animation begin="sph00E" attribute="scale" from="1.5 1.5 1.5" to="1 1 1" dur="200" easing="linear">
+				</a-animation>
+				<a-text value="SALA05" position="0
+		 1.2 0" width="10" color="white" align="center" side="double"></a-text>
+			</a-sphere>
+			<a-sphere id="sph06" position="-10 0 -10" color="#6691F2" wireframe="true">
+				<a-animation begin="sph00S" attribute="scale" from="1 1 1" to="1.5 1.5 1.5" dur="200" easing="linear">
+				</a-animation>
+				<a-animation begin="sph00E" attribute="scale" from="1.5 1.5 1.5" to="1 1 1" dur="200" easing="linear">
+				</a-animation>
+				<a-text value="SALA06" position="0
+		 1.2 0" width="10" color="white" align="center" side="double"></a-text>
+			</a-sphere>
+			<a-sphere id="sph07" position="0 0 -10" color="#77D1AE" wireframe="true">
+				<a-animation begin="sph00S" attribute="scale" from="1 1 1" to="1.5 1.5 1.5" dur="200" easing="linear">
+				</a-animation>
+				<a-animation begin="sph00E" attribute="scale" from="1.5 1.5 1.5" to="1 1 1" dur="200" easing="linear">
+				</a-animation>
+				<a-text value="SALA07" position="0
+		 1.2 0" width="10" color="white" align="center" side="double"></a-text>
+			</a-sphere>
+			<a-sphere id="sph08" position="0 -5 0" color="#6691F2" wireframe="true">
+				<a-animation begin="sph00S" attribute="scale" from="1 1 1" to="1.5 1.5 1.5" dur="200" easing="linear">
+				</a-animation>
+				<a-animation begin="sph00E" attribute="scale" from="1.5 1.5 1.5" to="1 1 1" dur="200" easing="linear">
+				</a-animation>
+				<a-text value="SALA08" position="0
+		 1.2 0" width="10" color="white" align="center" side="double"></a-text>
+			</a-sphere>
+
+			<a-entity id="ln01" line="start: 0, 0, 0; end: 10, 0, 0; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln02" line="start: 10, 0, 0; end: 10, 0, 10; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln03" line="start: 10, 0, 10; end: 0, 0, 10; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln04" line="start: 0, 0, 10; end: 0, 0, 0; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln05" line="start: 0, 0, 0; end: 0 0 -10; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln06" line="start: -10, 0, 0; end: -10, 0, -10; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln07" line="start: -10, 0, -10; end: 0, 0, -10; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln08" line="start: 0, 0, 0; end: -10 0 0; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln09" line="start: 0, 5, 0; end: 10 0 0; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln10" line="start: 0, 5, 0; end: -10 0 0; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln11" line="start: 0, 5, 0; end: 0 0 10; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln12" line="start: 0, 5, 0; end: 0 0 -10; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln13" line="start: 0, -5, 0; end: 10 0 0; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln14" line="start: 0, -5, 0; end: -10 0 0; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln15" line="start: 0, -5, 0; end: 0 0 10; color:white; opacity:.5;"></a-entity>
+			<a-entity id="ln16" line="start: 0, -5, 0; end: 0 0 -10; color:white; opacity:.5;"></a-entity>
+
+			<script>
+				const loc = [
+					"0,0,0",
+					"10,0,0",
+					"10,0,10",
+					"0,0,10",
+					"0,5,0",
+					"-10,0,0",
+					"-10,0,-10",
+					"0,0,-10",
+					"0,-5,0"
+				];
+				const obj = [
+					"sph00",
+					"sph01",
+					"sph02",
+					"sph03",
+					"sph04",
+					"sph05",
+					"sph06",
+					"sph07",
+					"sph08"
+				];
+				const newLoc = [9]
+
+				//controle posição random
+				function Ran(min, max) {
+					return Math.random() * (max - min) + min;
+				}
+				function setPos(nl) {
+					const doc = document.getElementById(obj[nl]);
+					const fi = Ran(-3, 3);
+
+					//console.log(loc[nl]);
+					const sp = loc[nl].split(",", 3).map((e) => parseFloat(e));
+					const s1 = sp[0] + fi;
+					const s2 = sp[1] + fi;
+					const s3 = sp[2] + fi;
+					var comp = s1 + " " + s2 + " " + s3;
+
+					//console.log(comp);
+
+					doc.setAttribute("position", comp);
+
+					newLoc[nl] = s1 + ", " + s2 + ", " + s3 + ";";
+					console.log(comp);
+				}
+
+				//controle linhas
+				function setLine(id, loc1, loc2) {
+					const doc = document.getElementById(id);
+					const str = "start: " + newLoc[loc1] + " end: " + newLoc[loc2] + "; color: white;";
+					//console.log(newLoc[2]);
+					doc.setAttribute("line", str);
+
+				}
+
+				for (var i = 0; i < 9; i++) {
+					setPos(i);
+				}
+
+
+				setLine("ln01", 0, 1);
+				setLine("ln02", 1, 2);
+				setLine("ln03", 2, 3);
+				setLine("ln04", 3, 0);
+				setLine("ln05", 0, 5);
+				setLine("ln06", 5, 6);
+				setLine("ln07", 6, 7);
+				setLine("ln08", 7, 0);
+				setLine("ln09", 8, 1);
+				setLine("ln10", 8, 3);
+				setLine("ln11", 8, 5);
+				setLine("ln12", 8, 7);
+				setLine("ln13", 4, 1);
+				setLine("ln14", 4, 3);
+				setLine("ln15", 4, 5);
+				setLine("ln16", 4, 7);
+
+
+
+			</script>
+
+
+
+			<script>
+
+				//controle esferas
+				const timer = 1000;
+
+				function behavior(sph, loc) {
+					sph.addEventListener("mousedown", function () {
+						addEventListener('click', function (event) {
+							var fader = document.getElementById('fader'),
+								anchor = event.currentTarget;
+
+							var listener = function () {
+								window.location = anchor.href;
+								fader.removeEventListener('animationend', listener);
+							};
+							fader.addEventListener('animationend', listener);
+
+							event.preventDefault();
+							fader.classList.add('fade-in');
+						});
+						setTimeout(() => { location.href = loc; }, timer);
+					});
+
+					sph.addEventListener("mouseenter", function () {
+						sph.emit('sph00S');
+					});
+					sph.addEventListener("mouseleave", function () {
+						sph.emit('sph00E');
+					});
+				}
+				behavior(sph00, "index.html");
+				behavior(sph01, "defaultRoom01.html");
+				behavior(sph02, "defaultRoom01.html");
+				behavior(sph03, "defaultRoom01.html");
+				behavior(sph04, "defaultRoom01.html");
+				behavior(sph05, "defaultRoom01.html");
+				behavior(sph06, "CenaBase.html");
+				behavior(sph07, "CenaBase.html");
+				behavior(sph08, "CenaBase.html");
+
+
+			</script>
+
+		</a-scene>
+
+
+		<div style="position:absolute; top:10px; left:10px; z-index:1000;">
+			<!-- Image Map Generated by http://www.image-map.net/ -->
+			<img src="./assets/menuMini.png" usemap="#image-map">
+
+			<map name="image-map">
+				<area target="_self" alt="previous" title="previous" href="index.html" coords="50,57,0,111" shape="rect">
+				<area target="_self" alt="next" title="next" href="s01.html" coords="232,57,280,106" shape="rect">
+				<area target="_self" alt="index" title="index" href="indexMols.html" coords="140,80,81" shape="circle">
+			</map>
+
+		</div>
+		<h5 style="position:absolute; z-index: 10; color:white; left:10px; top:150px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"
+		>use o mouse para explorar e escolha sua cena</h5>
+	</div>
+</body>
+
+</html>

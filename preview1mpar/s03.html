@@ -131,10 +131,17 @@
                 <img crossorigin id="link1" src="./assets/default-favicon.png">
                 <img crossorigin id="cupula" src="./assets/s00b/sphere01.jpg">
                 <img crossorigin id="ceu" src="./assets/s01/pic01.jpg">
+                <img crossorigin id="txtEn" src="./assets/s03/txtEn.png" />
+                <img crossorigin id="txtPt" src="./assets/s03/txtPt.png" />
+                <img crossorigin id="txtSp" src="./assets/s03/txtSp.png" />
                 <a-asset-item id="cupula" src="./assets/cupula.glb"></a-asset-item>
                 <a-asset-item id="base" src="./assets/s03/base.gltf"></a-asset-item>
-                <video id="vid01" src="./assets/s03/TRAILER1024.mp4" autoplay="true" loop="false">
-                <audio id="track"  src="./assets/s03/TRAILER1024.mp3"  autoplay="true" loop="true" ></audio> 
+
+                <video id="vid01" loop crossorigin="anonymous" webkit-playsinline playsinline autoplay="true" loop="true">
+                    <source src="https://cdn.glitch.com/d9a5c2ab-7a04-4d2f-88c6-5ba6495dc84a%2FTRAILER1024.mp4?v=1606030229546"></source>
+                </video>
+               
+               
 
 
 
@@ -158,11 +165,17 @@
             <a-light light="type:point; castShadow:true;" color="white" intensity="3" position="-10 7 10"></a-light>
             <a-light light="type:point; castShadow:true;" color="white" intensity="3" position="10 7 -10"></a-light>
             <a-light light="type:point; castShadow:true;" color="white" intensity="3" position="-10 7 -10"></a-light>
+            <a-light
+            light="type:point; castShadow:true;"
+            color="white"
+            intensity="5"
+            position="0 7 0"
+          ></a-light>
 
             <a-plane id="piso" opacity="1" rotation="-90 0 0" position="0 0 0" width="50" height="50"
                 aframe-mirror="color:#000000;intensity:0.1;textureWidth:1024;textureHeight:1024;"></a-plane>
             <!-- Nav Mesh  -->
-            <a-entity gltf-model="./assets/pisoHole20x20.glb" id="mesh" scale="1 1 1" nav-mesh visible="false">
+            <a-entity gltf-model="./assets/pisoHole20x20.glb" id="mesh" scale="1.25 1 1.25" nav-mesh visible="false">
             </a-entity>
 
             <a-entity gltf-model="./assets/cupula.glb" id="cupula" position="0 0 0" ></a-entity>
@@ -173,28 +186,73 @@
 
 
 
-
+            <a-entity aframe-multi-video-component="src: #vid01; time: 200; duration: 5; volume: 0.0; autoplay:true;" scale=".0 .0 .0"></a-entity>
             <a-video src="#vid01" width="16" height="9" position="0 0 0" visible="false"></a-video>
             
 
 
             <a-entity id="cha" gltf-model="#base" position="0 .1 0" scale=".02 .02 .02 "></a-entity>
 
-            <a-curvedimage id="painelcurvo" src="#ceu" radius="5.7" theta-length="90" height="6" rotation="0 0 0"
-                position="-7 3 7" scale="-1 1 1" material="src: #vid01; npot: false; on:false;"
-                geometry="radius:6.97;thetaLength:130;thetaStart:-20" shadow="receive: true">
-            </a-curvedimage>
 
 
             <a-curvedimage id="painelcurvo2" src="#ceu" radius="5.7" theta-length="90" height="6" rotation="0 -180 0"
-                position="7 3 -7" scale="-1 1 1" material="src: #vid01; npot: false; on:false;"
+            position="7 4 -7" scale="-1 1.4 1" material="src: #vid01;  volume: 0.0; autoplay:true; npot: false; on:false;"
                 geometry="radius:6.97;thetaLength:130;thetaStart:-20" shadow="receive: true">
             </a-curvedimage>
 
-            <a-curvedimage id="painelcurvo3" src="#ceu" radius="5.7" theta-length="90" height="6" rotation="0 0 0"
-                position="7 3 7" material="" geometry="radius:6.97;thetaLength:130;thetaStart:-20"
-                shadow="receive: true">
-            </a-curvedimage>
+            <a-entity id="totens" rotation="0 90 0">
+                <a-box
+                  id="totem1"
+                  material="color:#363636;fog:false;side:double"
+                  geometry=""
+                  rotation="0 45 0"
+                  scale="2 0.4 1"
+                  position="-11.12967 0.2 -11.72694"
+                >
+                  <a-plane
+                    id="txt1"
+                    material="src:#txtEn; side:double; shader:flat;"
+                    position="0 7 0"
+                    geometry=""
+                    scale="2 14 1"
+                  ></a-plane>
+                </a-box>
+        
+                <a-box
+                  id="totem2"
+                  material="color:#363636;fog:false;side:double"
+                  geometry=""
+                  rotation="0 75 0"
+                  scale="2 0.4 1"
+                  position="-13.49494 0.2 -7.61146"
+                >
+                  <a-plane
+                    id="txt2"
+                    material="src:#txtPt;side:double;shader:flat"
+                    position="0 7 0"
+                    geometry=""
+                    scale="2 14 1"
+                  ></a-plane>
+                </a-box>
+        
+                <a-box
+                  id="totem3"
+                  material="color:#363636;fog:false;side:double"
+                  geometry=""
+                  rotation="0 15 0"
+                  scale="2 0.4 1"
+                  position="-6.59 0.2 -14.017"
+                >
+                  <a-plane
+                    id="txt3"
+                    material="src:#txtSp;side:double;shader:flat"
+                    position="0 7 0"
+                    geometry=""
+                    scale="2 14 1"
+                  ></a-plane>
+                </a-box>
+        
+            </a-entity>
 
 
 
